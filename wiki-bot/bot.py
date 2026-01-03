@@ -60,15 +60,6 @@ async def osrs(interaction: discord.Interaction, query: str):
         await interaction.followup.send(f"Sorry, I encountered an error: {str(e)}")
 
 
-@bot.event
-async def on_message(message: discord.Message) -> None:
-    if message.author == bot.user:
-        return
-
-    # Process commands for prefix-based commands (if any)
-    await bot.process_commands(message)
-
-
 if __name__ == "__main__":
     TOKEN: str | None = os.getenv("DISCORD_TOKEN")
     if not TOKEN:
