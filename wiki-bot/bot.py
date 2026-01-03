@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import logging
 from dotenv import load_dotenv
-from claude_client import ClaudeClient
+from wiki_agent import WikiAgent
 
 
 COMMAND_NAME = "osrs"
@@ -21,7 +21,7 @@ intents: discord.Intents = discord.Intents.default()
 intents.message_content = True
 
 bot: commands.Bot = commands.Bot(command_prefix="!", intents=intents)
-claude_client = ClaudeClient()
+wiki_agent = WikiAgent()
 
 
 @bot.event
@@ -43,15 +43,10 @@ async def osrs(interaction: discord.Interaction, query: str):
     # Defer the response since Claude API call might take a moment
     await interaction.response.defer()
 
-    # Create the prompt for Claude
-    prompt = f"This is a question about the game Old School RuneScape. Please answer the question concisely and respond with 1 OSRS wiki link to answer the question. Here is the question: {query}"
-
-    logger.info(f"Processing query: {query}")
-
     try:
         # Get response from Claude
-        response = claude_client.send_message(prompt)
-        logger.info(f"Received response from Claude")
+        response = wiki_agent.send_message(query)
+        logger.debug(f"Received response from Claude")
 
         # Send the response back to Discord
         await interaction.followup.send(response)

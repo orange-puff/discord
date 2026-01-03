@@ -19,7 +19,7 @@ class ClaudeClient:
             raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
 
         self.client = Anthropic(api_key=self.api_key)
-        logger.info("Claude client initialized")
+        logger.debug("Claude client initialized")
 
     def send_message(
         self, message: str, model: str = "claude-sonnet-4-20250514"
@@ -33,7 +33,7 @@ class ClaudeClient:
         Returns:
             The response text from Claude
         """
-        logger.info(f"Sending message to Claude (model: {model})")
+        logger.debug(f"Sending message to Claude (model: {model})")
         response = self.client.messages.create(
             model=model,
             max_tokens=1024,
