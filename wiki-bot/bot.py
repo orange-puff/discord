@@ -49,7 +49,7 @@ async def osrs(interaction: discord.Interaction, query: str):
         logger.debug(f"Received response from Claude")
 
         # Send the response back to Discord
-        total_response = f"Query: {query}\n\n{response}"
+        total_response = f"**Query:** {query}\n\n{response}"
         await interaction.followup.send(total_response)
     except Exception as e:
         logger.error(f"Error processing query: {e}")
