@@ -24,7 +24,7 @@ class ClaudeClient:
     def send_message(
         self,
         message: str,
-        model: str = "claude-3-haiku-20240307",  # "claude-sonnet-4-20250514"
+        model: str = "claude-haiku-4-5",  # "claude-sonnet-4-20250514"
     ) -> str:
         """Send a message to Claude and get a response.
 
